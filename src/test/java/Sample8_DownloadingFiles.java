@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Sample8_DownloadingFiles {
@@ -36,11 +37,15 @@ public class Sample8_DownloadingFiles {
 
     WebDriver driver = new FirefoxDriver(caps);
 
-    driver.get("http://localhost/test_download.html");
-    driver.findElement(By.tagName("a")).click();
+    driver.get("http://the-internet.herokuapp.com");
+    driver.findElement(By.linkText("File Download")).click();
+    driver.findElement(By.linkText("hello-world.pdf")).click();
 
-    String fileName = driver.findElement(By.tagName("body")).getText();
-    assertTrue(new File(fileName).exists());
+    File downloadedFile = new File (driver.findElement(By.tagName("body")).getText());
+    System.out.println(downloadedFile);
+    System.out.println(FileUtils.generateMD5(downloadedFile));
+    assertTrue(downloadedFile.exists());
+    assertEquals(FileUtils.generateMD5(downloadedFile), "cb9d8dec03ed0a1dfbcac481f91c53cb");
 
     Thread.sleep(30000);
 
@@ -75,6 +80,7 @@ public class Sample8_DownloadingFiles {
         response.removeHeaders("Content-Type");
         response.removeHeaders("Content-Encoding");
         response.removeHeaders("Content-Disposition");
+        response.removeHeaders("Content-Length");
 
         response.addHeader("Content-Type", "text/html");
         response.addHeader("Content-Length", "" + tempFile.getAbsolutePath().length());
