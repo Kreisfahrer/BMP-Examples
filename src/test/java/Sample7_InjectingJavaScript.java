@@ -1,21 +1,17 @@
 import net.lightbody.bmp.proxy.ProxyServer;
-import org.apache.http.*;
+import org.apache.http.HttpException;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-
-import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class Sample7_InjectingJavaScript {
 
@@ -32,12 +28,10 @@ public class Sample7_InjectingJavaScript {
 
     FirefoxDriver driver = new FirefoxDriver(caps);
 
-    driver.get("http://localhost/test_referer.html");
+    driver.get("http://the-internet.herokuapp.com/");
     String linkText = (String) driver.executeScript("return $(\"a\").text()");
 
-    assertThat(
-        linkText,
-        is("click me!"));
+    Assert.assertTrue(linkText.contains("Basic Auth"));
 
     driver.quit();
 

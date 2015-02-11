@@ -47,7 +47,7 @@ public class Sample8_DownloadingFiles {
     assertTrue(downloadedFile.exists());
     assertEquals(FileUtils.generateMD5(downloadedFile), "cb9d8dec03ed0a1dfbcac481f91c53cb");
 
-    Thread.sleep(30000);
+     Thread.sleep(30000);
 
     driver.quit();
 

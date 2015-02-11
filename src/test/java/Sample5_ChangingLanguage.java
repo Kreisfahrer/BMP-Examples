@@ -14,7 +14,7 @@ public class Sample5_ChangingLanguage {
     ProxyServer bmp = new ProxyServer(8071);
     bmp.start();
 
-    RequestInterceptor languageChanger = new LanguageChanger("en,ru");
+    RequestInterceptor languageChanger = new LanguageChanger("en,ru"); //or ru,en
     bmp.addRequestInterceptor(languageChanger);
 
     DesiredCapabilities caps = new DesiredCapabilities();
