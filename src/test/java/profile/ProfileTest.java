@@ -11,7 +11,11 @@ import java.io.IOException;
 public class ProfileTest {
     @Test
     public void pluginTest() throws IOException {
-        //for chrome
+//        custom profile
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("user-data-dir=/path/to/your/custom/profile");
+
+//        for chrome
 //        ChromeOptions options = new ChromeOptions();
 //        options.addExtensions(new File("/path/to/extension.crx"));
 //        ChromeDriver driver = new ChromeDriver(options);
